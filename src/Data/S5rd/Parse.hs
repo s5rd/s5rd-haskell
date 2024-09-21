@@ -6,7 +6,6 @@ module Data.S5rd.Parse
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text.Lazy.Encoding as TLE
 import qualified Data.Vector as V
-import qualified Text.Megaparsec.Error as M
 
 import Data.S5rd.Parse.Binary (parseBinaryS5rd)
 import Data.S5rd.Parse.Text (parseTextS5rd)

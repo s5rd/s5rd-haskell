@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE RankNTypes #-}
@@ -16,7 +17,9 @@ import Control.Monad (void)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Short as SBS
 import qualified Data.Char as Char
+#if !MIN_VERSION_base(4,20,0)
 import Data.List (foldl')
+#endif
 import qualified Data.List.NonEmpty as NE
 import qualified Data.Map as Map
 import Data.Maybe (catMaybes, isNothing)
