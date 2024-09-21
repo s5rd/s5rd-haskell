@@ -85,10 +85,16 @@ mapJsonToS5rd (Aeson.Object obj) = S5rd'Array $ V.fromList
 mapJsonToS5rd (Aeson.Array xs) = S5rd'Array $ V.map mapJsonToS5rd xs
 
 subMap :: Map.Map SBS.ShortByteString Aeson.Value
-subMap = Map.fromList
+subMap = Map.fromList $
   [ ("null", Aeson.Null)
-  , ("true", Aeson.Bool True)
-  , ("false", Aeson.Bool False)
+  ] ++ map (\k -> (k, Aeson.Bool True))
+  [ "y", "Y", "yes", "Yes", "YES"
+  , "true", "True", "TRUE"
+  , "on", "On", "ON"
+  ] ++ map (\k -> (k, Aeson.Bool False))
+  [ "n", "N", "no", "No", "NO"
+  , "false", "False", "FALSE"
+  , "off", "Off", "OFF"
   ]
 
 mapS5rdKeyToJsonKey :: S5rdKey -> Maybe Aeson.Key
