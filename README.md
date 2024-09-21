@@ -38,10 +38,10 @@ The filename only affects `ParseS5rdError`.
 
 ## Property
 
-`parse` functions and `serialize`/`pretty` functions are the inverse of each other.
-See <test/Prop.hs>.
+`parse` function and `serialize`/`pretty` functions are the inverse of each other.
+See [test/Prop.hs](test/Prop.hs).
 
 ## Treat as JSON or YAML
 
-parseS5rdText accepts JSON-like and YAML-like format.
-See <test/External.hs>.
+`parse` accepts JSON-like and YAML-like format.
+See [test/External.hs](test/External.hs).
