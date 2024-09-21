@@ -1,0 +1,96 @@
+cabal-version:      3.0
+name:               s5rd
+version:            0.1.0.0
+synopsis:           Reference implementation of s5rd
+description:
+    s5rd (numeronym of the word standard)
+    is lightweight recursive binary/text data format.
+category:           Data
+license:            Apache-2.0
+license-file:       LICENSE
+homepage:           https://github.com/s5rd/s5rd-haskell
+bug-reports:        https://github.com/s5rd/s5rd-haskell/issues
+author:             0y2k <0x0y2k@gmail.com>
+maintainer:         0y2k <0x0y2k@gmail.com>
+build-type:         Simple
+extra-doc-files:
+    CHANGELOG.md,
+    README.md,
+
+source-repository head
+    type:     git
+    location: https://github.com/s5rd/s5rd-haskell
+
+common depends
+    build-depends:
+        base >= 4.16 && < 4.21,
+        bytestring >= 0.11 && < 0.13,
+        containers >= 0.6.5 && < 0.8,
+        text >= 2.0 && < 2.2,
+        vector >= 0.13 && < 0.14,
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           depends, warnings
+    default-language: Haskell2010
+    hs-source-dirs:   src
+    build-depends:
+        generic-data >= 1.1 && < 1.2,
+        megaparsec >= 9.0 && < 10.0,
+        microlens-platform >= 0.4.3.1 && < 0.5,
+        utf8-string >= 1 && < 1.1,
+    exposed-modules:
+        Data.S5rd,
+        Data.S5rd.Decode,
+        Data.S5rd.Encode,
+        Data.S5rd.From,
+        Data.S5rd.Parse,
+        Data.S5rd.Parse.Binary,
+        Data.S5rd.Parse.Text,
+        Data.S5rd.Parse.Type,
+        Data.S5rd.Pretty.Text,
+        Data.S5rd.Serialize,
+        Data.S5rd.Serialize.Binary,
+        Data.S5rd.Serialize.Text,
+        Data.S5rd.To,
+        Data.S5rd.Type,
+        Data.S5rd.Util,
+    other-modules:
+        Data.S5rd.Internal,
+
+executable s5rd
+    import:           depends, warnings
+    default-language: Haskell2010
+    hs-source-dirs:   app
+    main-is:          Main.hs
+    build-depends:
+        s5rd,
+
+test-suite s5rd-test
+    import:           depends, warnings
+    default-language: Haskell2010
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    type:             exitcode-stdio-1.0
+    build-tool-depends:
+        tasty-discover:tasty-discover
+    build-depends:
+        s5rd,
+        aeson,
+        hedgehog,
+        scientific,
+        tasty,
+        tasty-hunit,
+        tasty-hedgehog,
+        yaml,
+    other-modules:
+        From,
+        External,
+        Internal,
+        Parse.Binary,
+        Parse.Text,
+        Prop,
+        To,
+        Util,
